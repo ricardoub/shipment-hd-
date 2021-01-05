@@ -1,0 +1,11 @@
+## TODO
+- create permissions funcionality
+  - model
+  - migration
+  - controller
+  - route
+- create profiles functionality
+- create actions to link a profile to permissions
+- add users fields
+- create actions to link a user to profiles
+- implement access control rules for functionalities  

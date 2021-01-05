@@ -1,0 +1,39 @@
+- Advanced new file
+- Auto Import
+- Beautiful
+- Beautiful Blade
+- Clippboard History
+- Draw.io Integration
+- Excel Viewer
+- Git
+  - Git Leans
+  - Git blame
+  - Git Graph
+- PHP
+  - PHP Productive Pack
+    - PHP Constructor
+    - php cs fixer
+    - PHP Debug
+    - PHP DocBlocker
+    - PHP Intelephense
+    - PHP Namespace Resolver
+    - PHPUnit Test Explorer
+    - PHPUnit Snippets
+    - PHP Add Property
+  - PHP Snippets
+- Laravel
+  - Laravel Extension Pack
+    - DotENV
+    - PHP Debug
+    - PHP Intelephense
+    - EditorConfig for VS Code
+    - Laravel Artisan
+    - Laravel Blade Snippers
+    - Laravel Extra Intellisense
+    - Laravel goto controller
+    - Laravel goto view
+    - Laravel Snippets
+  - Laravel docs
+- Tailwind
+  - TailWind CSS Intelephense
+  - Tailwind Docs

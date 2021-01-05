@@ -3,22 +3,15 @@
 ## About Shipment
 Shipment is a web application to manager expedition units, for tracking the sending, receiving, and location of volumes in a small organization. 
 
-## TODO
-- create the system data flow diagram 
-- create permissions funcionality
-- create profiles functionality
-- create actions to link a profile to permissions
-- add users fields
-- create actions to link a user to profiles
-- implement access control rules for functionalities  
+## TODO / DONE 
+- view on [todo](docs/TODO.md) and [done](docs/DONE.md) documents.
 
-## DONE (reverse order)
-- configure environment
-  - vs code extensions instaled
-  - set up environment to use Laragon
-- create the system repository on [Github](https://github.com/ricardoub/shipment)
-- create Laravel 8 project
+## VERSIONS details
+- view on [versions](docs/VERSIONS.md) document.
 
+## FEATURES (reverse order)
+- Permissions: define the capabilities of users to use the system. They are used grouped in Profiles.
+- User register and login are default functionality of Laravel.
 
 ## Security Vulnerabilities
 
