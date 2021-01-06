@@ -1,4 +1,6 @@
 ## TODO
+- create combos functionality
+- create parametres functionality
 - create permissions funcionality
   - model
   - migration
