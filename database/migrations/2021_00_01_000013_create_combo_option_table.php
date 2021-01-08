@@ -13,8 +13,20 @@ class CreateComboOptionTable extends Migration
      */
     public function up()
     {
+        Schema::create('combo_option', function (Blueprint $table) {
+            $table->unsignedBigInteger('combo_id');
+            $table->unsignedBigInteger('option_id');
+            $table->boolean('active')->nullable();
+            $table->boolean('enabled')->nullable();
+            $table->boolean('showed')->nullable();
+            $table->string('order')->nullable();
+        });
+
         Schema::table('combo_option', function (Blueprint $table) {
-            //
+            $table->foreign('combo_id')->references('id')->on('combos')
+                ->onDelete('cascade');
+            $table->foreign('option_id')->references('id')->on('options')
+                ->onDelete('cascade');
         });
     }
 
@@ -26,7 +38,7 @@ class CreateComboOptionTable extends Migration
     public function down()
     {
         Schema::table('combo_option', function (Blueprint $table) {
-            //
+            Schema::dropIfExists('combo_option');
         });
     }
 }

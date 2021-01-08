@@ -15,7 +15,14 @@ class CreateCombosTable extends Migration
     {
         Schema::create('combos', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
+            $table->string('action');
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->string('order_by')->nullable();
+
             $table->timestamps();
+
         });
     }
 

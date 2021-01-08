@@ -31,7 +31,7 @@ class CreateParametersTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('record_category_id')->references('id')->on('posts')->onDelete('cascade');
+            //$table->foreign('record_category_id')->references('id')->on('posts')->onDelete('cascade');
 
         });
     }
