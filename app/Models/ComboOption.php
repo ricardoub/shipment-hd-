@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ComboOption extends Model
 {
+    protected $table = 'combo_option';
+
     use HasFactory;
 }

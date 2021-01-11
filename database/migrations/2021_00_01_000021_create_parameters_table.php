@@ -20,10 +20,10 @@ class CreateParametersTable extends Migration
             $table->string('description')->nullable();
 
             // foreign keys to the combo_options table
-            $table->string('record_category_id');
-            $table->string('record_situation_id');
-            $table->string('display_in_list_id');
-            $table->string('routine_execution_id');
+            $table->string('recordcategory_id');
+            $table->string('recordsituation_id');
+            $table->string('recorddisplay_id');
+            $table->string('routine_id');
             $table->string('value_type_id');
 
             // records are stored in parameter_values table

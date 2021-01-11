@@ -20,6 +20,9 @@ class CreateComboOptionTable extends Migration
             $table->boolean('enabled')->nullable();
             $table->boolean('showed')->nullable();
             $table->string('order')->nullable();
+
+            $table->timestamps();
+
         });
 
         Schema::table('combo_option', function (Blueprint $table) {

@@ -15,7 +15,8 @@ class Combo extends Model
      */
     public function options()
     {
-        return $this->belongsToMany(Option::class, 'combo_option');
+        return $this->belongsToMany(Option::class, 'combo_option')
+            ->withPivot('active','enabled','showed','order');
     }
 
     /**

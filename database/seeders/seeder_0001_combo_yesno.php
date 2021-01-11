@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Combo;
 use App\Models\Option;
+use App\Models\ComboOption;
 use App\Services\ComboService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -31,47 +32,62 @@ class seeder_0001_combo_yesno extends Seeder
         $this->seed_combo();
         $this->seed_options();
         $this->seed_combo_options();
+
     }
 
     public function seed_combo()
     {
 
-        $yesno = [
-            [
-                'type'        => 'yesno',
-                'action'      => 'combo',
-                'name'        => 'Sim ou Não',
-                'description' => 'Caixa de seleção com opções Sim ou Não',
-                'order_by'    => 'value',
-            ]
+        $key    = 0;
+        $type   = 'yesno';
+        $action = 'combo';
 
-        ];
+        $items[$key]['type']        = $type;
+        $items[$key]['action']      = $action;
+        $items[$key]['name']        = 'Sim ou Não';
+        $items[$key]['description'] = 'Caixa de Seleção com opções Sim ou Não';
+        $items[$key]['order_by']    = 'value';
 
-        DB::table('combos')->insert($yesno);
+        foreach ($items as $key => $item) {
+            Combo::updateOrCreate(
+                [
+                    'type'   => $type,
+                    'action' => $action
+                ],
+                $items[$key]
+            );
+        }
+
     }
 
     public function seed_options()
     {
+        $key  = 0;
+        $type = 'yesno';
 
-        $yesno = [
-            [
-                'type'  => 'yesno',
-                'value' => 0,
-                'text'  => 'Selecione...'
-            ],
-            [
-                'type'  => 'yesno',
-                'value' => 1,
-                'text'  => 'Sim'
-            ],
-            [
-                'type'  => 'yesno',
-                'value' => 2,
-                'text'  => 'Nao'
-            ],
-        ];
+        $items[$key]['type']  = $type;
+        $items[$key]['value'] = 0;
+        $items[$key]['text']  = 'Selecione ...';
 
-        DB::table('options')->insert($yesno);
+        $key++;
+        $items[$key]['type']  = $type;
+        $items[$key]['value'] = 1;
+        $items[$key]['text']  = 'Sim';
+
+        $key++;
+        $items[$key]['type']  = $type;
+        $items[$key]['value'] = 2;
+        $items[$key]['text']  = 'Não';
+
+        foreach ($items as $key => $item) {
+            Option::updateOrCreate(
+                [
+                    'type'  => $type,
+                    'value' => $item['value']
+                ],
+                $items[$key]
+            );
+        }
 
     }
 
@@ -79,42 +95,41 @@ class seeder_0001_combo_yesno extends Seeder
     {
         Log::debug('seerder_0001_combo_yesno @ seed_combo_options');
 
-        $combo = $this->cbService->seeder_getCombo_ofType('yesno', 'combo');
+        $key    = 0;
+        $type   = 'yesno';
+        $action = 'combo';
 
-        $options = $this->cbService->seeder_getOptions_ofType('yesno');
+        $combo   = $this->cbService->seeder_getCombo_ofType($type, $action);
+        $options = $this->cbService->seeder_getOptions_ofType($type);
+        Log::debug('combo');
+        Log::debug($combo);
 
-        $yesno = [
-            [
-                'combo_id'  => $combo['id'],
-                'option_id' => $options[0]['id'],
-                'active'    => true,
-                'enabled'   => true,
-                'showed'    => true,
-                'order'     => 0,
-            ],
-            [
-                'combo_id'  => $combo['id'],
-                'option_id' => $options[1]['id'],
-                'active'    => true,
-                'enabled'   => true,
-                'showed'    => true,
-                'order'     => 0,
-            ],
-            [
-                'combo_id'  => $combo['id'],
-                'option_id' => $options[1]['id'],
-                'active'    => true,
-                'enabled'   => true,
-                'showed'    => true,
-                'order'     => 0,
-            ],
-        ];
+        Log::debug('options');
+        Log::debug($options);
 
-        DB::table('combo_option')->insert($yesno);
+        foreach ($options as $key => $option) {
 
-        $combo = $this->cbService->seeder_getCombo_ofType('yesno', 'combo');
+            $items[$key]['combo_id']  = $combo->id;
+            $items[$key]['option_id'] = $option->id;
+            $items[$key]['active']  = true;
+            $items[$key]['enabled'] = true;
+            $items[$key]['showed']  = true;
+            $items[$key]['order']   = 0;
 
-        Log::debug($combo->options);
+        }
+
+        foreach ($items as $key => $item) {
+            ComboOption::updateOrCreate(
+                [
+                    'combo_id'  => $item['combo_id'],
+                    'option_id' => $item['option_id']
+                ],
+                $items[$key]
+            );
+        }
+
+        // $combo = $this->cbService->seeder_getCombo_ofType($type, $action);
+        // Log::debug($combo->options);
 
     }
 
