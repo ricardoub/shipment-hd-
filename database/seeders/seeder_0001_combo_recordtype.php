@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class seeder_0001_combo_recordcategory extends Seeder
+class seeder_0001_combo_recordtype extends Seeder
 {
     /**
      * Run the database seeds.
@@ -26,7 +26,7 @@ class seeder_0001_combo_recordcategory extends Seeder
     {
 
         $key    = 0;
-        $type   = 'recordcategory';
+        $type   = 'recordtype';
         $action = 'combo';
 
         $items[$key]['type']        = $type;

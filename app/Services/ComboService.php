@@ -8,7 +8,7 @@ use App\Models\Option;
 class ComboService
 {
 
-    public function seeder_getCombo_ofType(string $type, string $action)
+    public function getCombo_ofType(string $type, string $action)
     {
 
         $combo = Combo::ofType($type)->inAction($action)->first();
@@ -17,7 +17,7 @@ class ComboService
 
     }
 
-    public function seeder_getOptions_ofType(string $type)
+    public function getOptions_ofType(string $type)
     {
 
         $options = Option::ofType($type)->get();

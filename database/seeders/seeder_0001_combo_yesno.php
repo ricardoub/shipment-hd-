@@ -27,20 +27,23 @@ class seeder_0001_combo_yesno extends Seeder
      */
     public function run()
     {
+        Log::debug('seeder_0001_combo_yesno @ run');
         // seeder_0001_combo -> deve truncar os registros das tabelas combos, options e combo_option
 
-        $this->seed_combo();
-        $this->seed_options();
-        $this->seed_combo_options();
+        $type   = 'yesno';
+        $action = 'combo';
+
+        $this->seed_combo($type, $action);
+        $this->seed_options($type);
+        $this->seed_combo_options($type, $action);
 
     }
 
-    public function seed_combo()
+    public function seed_combo($type, $action)
     {
+        Log::debug('seeder_0001_combo_yesno @ seed_combo');
 
         $key    = 0;
-        $type   = 'yesno';
-        $action = 'combo';
 
         $items[$key]['type']        = $type;
         $items[$key]['action']      = $action;
@@ -60,23 +63,33 @@ class seeder_0001_combo_yesno extends Seeder
 
     }
 
-    public function seed_options()
+    public function seed_options($type)
     {
+        Log::debug('seeder_0001_combo_yesno @ seed_options');
+
         $key  = 0;
-        $type = 'yesno';
 
         $items[$key]['type']  = $type;
         $items[$key]['value'] = 0;
+        $items[$key]['code']  = 'error_0';
+        $items[$key]['text']  = 'Não encontrado';
+
+        $key++;
+        $items[$key]['type']  = $type;
+        $items[$key]['value'] = 100;
+        $items[$key]['code']  = 'val_';
         $items[$key]['text']  = 'Selecione ...';
 
         $key++;
         $items[$key]['type']  = $type;
-        $items[$key]['value'] = 1;
+        $items[$key]['value'] = 101;
+        $items[$key]['code']  = 'yes';
         $items[$key]['text']  = 'Sim';
 
         $key++;
         $items[$key]['type']  = $type;
-        $items[$key]['value'] = 2;
+        $items[$key]['value'] = 102;
+        $items[$key]['code']  = 'no';
         $items[$key]['text']  = 'Não';
 
         foreach ($items as $key => $item) {
@@ -91,30 +104,26 @@ class seeder_0001_combo_yesno extends Seeder
 
     }
 
-    public function seed_combo_options()
+    public function seed_combo_options($type, $action)
     {
-        Log::debug('seerder_0001_combo_yesno @ seed_combo_options');
+        Log::debug('seeder_0001_combo_yesno @ seed_combo_options');
 
         $key    = 0;
-        $type   = 'yesno';
-        $action = 'combo';
 
-        $combo   = $this->cbService->seeder_getCombo_ofType($type, $action);
-        $options = $this->cbService->seeder_getOptions_ofType($type);
-        Log::debug('combo');
-        Log::debug($combo);
-
-        Log::debug('options');
-        Log::debug($options);
+        $combo   = $this->cbService->getCombo_ofType($type, $action);
+        $options = $this->cbService->getOptions_ofType($type);
 
         foreach ($options as $key => $option) {
 
-            $items[$key]['combo_id']  = $combo->id;
-            $items[$key]['option_id'] = $option->id;
-            $items[$key]['active']  = true;
-            $items[$key]['enabled'] = true;
-            $items[$key]['showed']  = true;
-            $items[$key]['order']   = 0;
+            $items[$key]['combo_id']       = $combo->id;
+            $items[$key]['option_id']      = $option->id;
+            $items[$key]['active']         = true;
+            $items[$key]['enabled']        = true;
+            $items[$key]['showed']         = true;
+            $items[$key]['order']          = 0;
+            $items[$key]['css_icon']       = null;
+            $items[$key]['css_text_color'] = null;
+            $items[$key]['css_bg_color']   = null;
 
         }
 
@@ -128,7 +137,7 @@ class seeder_0001_combo_yesno extends Seeder
             );
         }
 
-        // $combo = $this->cbService->seeder_getCombo_ofType($type, $action);
+        // $combo = $this->cbService->getCombo_ofType($type, $action);
         // Log::debug($combo->options);
 
     }

@@ -17,6 +17,7 @@ class CreateOptionsTable extends Migration
             $table->id();
             $table->string('type');
             $table->string('value');
+            $table->string('code');
             $table->string('text');
 
             $table->timestamps();

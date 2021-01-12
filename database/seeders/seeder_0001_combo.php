@@ -15,12 +15,12 @@ class seeder_0001_combo extends Seeder
      */
     public function run()
     {
-
+        Log::debug('seerder_0001_combo @ delete');
         DB::table('combo_option')->delete();
         DB::table('combos')->delete();
         DB::table('options')->delete();
 
-        Log::debug('seerder_0001_combo @ run');
+        Log::debug('seeder_0001_combo @ run');
         $this->call(seeder_0001_combo_yesno::class);
 
     }

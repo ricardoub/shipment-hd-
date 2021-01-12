@@ -20,6 +20,9 @@ class CreateComboOptionTable extends Migration
             $table->boolean('enabled')->nullable();
             $table->boolean('showed')->nullable();
             $table->string('order')->nullable();
+            $table->string('css_icon')->nullable();
+            $table->string('css_text_color')->nullable();
+            $table->string('css_bg_color')->nullable();
 
             $table->timestamps();
 
