@@ -22,6 +22,7 @@ class seeder_0001_combo extends Seeder
 
         Log::debug('seeder_0001_combo @ run');
         $this->call(seeder_0001_combo_yesno::class);
+        $this->call(seeder_0001_combo_recordtype::class);
 
     }
 

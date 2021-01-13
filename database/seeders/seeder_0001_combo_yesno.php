@@ -2,12 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Combo;
-use App\Models\Option;
-use App\Models\ComboOption;
 use App\Services\ComboService;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class seeder_0001_combo_yesno extends Seeder
@@ -48,17 +44,11 @@ class seeder_0001_combo_yesno extends Seeder
         $items[$key]['type']        = $type;
         $items[$key]['action']      = $action;
         $items[$key]['name']        = 'Sim ou Não';
-        $items[$key]['description'] = 'Caixa de Seleção com opções Sim ou Não';
+        $items[$key]['description'] = 'Caixa de Seleção com as opções Sim ou Não';
         $items[$key]['order_by']    = 'value';
 
         foreach ($items as $key => $item) {
-            Combo::updateOrCreate(
-                [
-                    'type'   => $type,
-                    'action' => $action
-                ],
-                $items[$key]
-            );
+            $model = $this->cbService->setCombo_updateOrCreate($type, $action, $items[$key]);
         }
 
     }
@@ -70,36 +60,31 @@ class seeder_0001_combo_yesno extends Seeder
         $key  = 0;
 
         $items[$key]['type']  = $type;
-        $items[$key]['value'] = 0;
-        $items[$key]['code']  = 'error_0';
-        $items[$key]['text']  = 'Não encontrado';
+        $items[$key]['code']  = 0;
+        $items[$key]['value'] = 'not_found';
+        $items[$key]['text']  = 'Not found';
 
         $key++;
         $items[$key]['type']  = $type;
-        $items[$key]['value'] = 100;
-        $items[$key]['code']  = 'val_';
-        $items[$key]['text']  = 'Selecione ...';
+        $items[$key]['code']  = 100;
+        $items[$key]['value'] = 'select';
+        $items[$key]['text']  = 'Seleccione ...';
 
         $key++;
         $items[$key]['type']  = $type;
-        $items[$key]['value'] = 101;
-        $items[$key]['code']  = 'yes';
+        $items[$key]['code']  = 101;
+        $items[$key]['value'] = 'yes';
         $items[$key]['text']  = 'Sim';
 
         $key++;
         $items[$key]['type']  = $type;
-        $items[$key]['value'] = 102;
-        $items[$key]['code']  = 'no';
+        $items[$key]['code']  = 102;
+        $items[$key]['value'] = 'no';
         $items[$key]['text']  = 'Não';
 
         foreach ($items as $key => $item) {
-            Option::updateOrCreate(
-                [
-                    'type'  => $type,
-                    'value' => $item['value']
-                ],
-                $items[$key]
-            );
+            $code = $items[$key]['code'];
+            $model = $this->cbService->setOption_updateOrCreate($type, $code, $items[$key]);
         }
 
     }
@@ -128,17 +113,16 @@ class seeder_0001_combo_yesno extends Seeder
         }
 
         foreach ($items as $key => $item) {
-            ComboOption::updateOrCreate(
-                [
-                    'combo_id'  => $item['combo_id'],
-                    'option_id' => $item['option_id']
-                ],
-                $items[$key]
-            );
+
+            $combo_id  = $item['combo_id'];
+            $option_id = $item['option_id'];
+
+            $model = $this->cbService->setComboOption_updateOrCreate($combo_id, $option_id, $items[$key]);
+
         }
 
-        // $combo = $this->cbService->getCombo_ofType($type, $action);
-        // Log::debug($combo->options);
+        $combo = $this->cbService->getCombo_ofType($type, $action);
+        Log::debug($combo->options);
 
     }
 
